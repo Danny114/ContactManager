@@ -15,7 +15,7 @@ router.get("/", auth, async (req, res) => {
     const contacts = await Contact.find({ user: req.user.id }).sort({
       date: -1
     });
-    res.json({ contacts });
+    res.json(contacts);
   } catch (err) {
     console.error(err.message);
     res.status(500).json({ msg: "server error" });
@@ -50,7 +50,7 @@ router.post(
         user: req.user.id
       });
       const contact = await newContact.save();
-      res.json({ contact });
+      res.json(contact);
     } catch (err) {
       console.error(err.message);
       res.status(500).json({ msg: "server error" });
@@ -85,7 +85,7 @@ router.put("/:id", auth, async (req, res) => {
       { new: true }
     );
 
-    res.json({ contact });
+    res.json(contact);
   } catch (err) {
     console.error(err.message);
     res.status(401).json({ msg: "Unable to change contact" });
